@@ -66,7 +66,7 @@ class AsyncCron:
                     next_time = None
                     try:
                         # Ask for more values from iterator until we get one in the future
-                        while next_time := next(cron_item.next_time_iterator) <= now:
+                        while (next_time := next(cron_item.next_time_iterator)) <= now:
                             pass
                     except StopIteration:
                         # Iterator is exhausted, assume task it to stay out of schedule
