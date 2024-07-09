@@ -109,13 +109,13 @@ class AsyncCron:
         )
 
         heapq.heappush(self.schedule, entry)
-        self.event.clear()
+        self.event.set()
         return entry.id
 
     def cancel(self, id: uuid.UUID):
         self.schedule = [item for item in self.schedule if item.id != id]
         heapq.heapify(self.schedule)
-        self.event.clear()
+        self.event.set()
 
 
 @contextlib.contextmanager
