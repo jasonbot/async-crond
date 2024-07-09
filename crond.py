@@ -65,11 +65,13 @@ class AsyncCron:
                     # Try to determine if it should be scheduled for another run
                     next_time = None
                     try:
-                        # Ask for more values from iterator until we get one in the future
+                        # Ask for more values from iterator until we get one in
+                        # the future
                         while (next_time := next(cron_item.next_time_iterator)) <= now:
                             pass
                     except StopIteration:
-                        # Iterator is exhausted, assume task it to stay out of schedule
+                        # Iterator is exhausted, assume task is to no longer be
+                        # scheduled to run
                         pass
 
                     # Is the task ready to be scheduled again?
@@ -96,9 +98,9 @@ class AsyncCron:
                     if time_to_sleep < 0:
                         time_to_sleep = 0
 
-                # Wait for next scheduled task to be ready OR for the Event, which is a
-                # trigger letting us know the schedule has changed and the sleep value
-                # has potentially been invalidated
+                # Wait for next scheduled task to be ready OR for the Event,
+                # which is a trigger letting us know the schedule has changed
+                # and the sleep value has potentially been invalidated
                 _, pending = await asyncio.wait(
                     [
                         asyncio.create_task(asyncio.sleep(time_to_sleep)),
