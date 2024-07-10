@@ -32,3 +32,8 @@ with async_cron() as cron:
 ```
 
 `schedule` and `async_cron` can accept both `def` and `async def` functions as arguments to `callable`.
+
+
+## Distribution
+
+This is one file. Just copy the file. Why bother adding another dependency?
